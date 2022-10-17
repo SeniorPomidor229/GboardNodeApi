@@ -4,14 +4,22 @@ const connectionString = process.env.MONGOURI;
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
-const todoRoutes = require('./routes/user_routes')
 const client = new mongoClient(connectionString);
+const cors = require('cors')
 
-client.connect(function(err, client){
+const userRoute = require('./routes/user_routes')
+
+//эта херня нужна, чтоб фетч запросом с этого адреса не была Cors политика
+var corsOption = {
+    origin: "http://localhost:8081"
+};
+
+//тест конекшена к базе
+client.connect(function(_err, client){
        
     const db = client.db("admin");
      
-    db.command({ping: 1}, function(err, result){
+    db.command({ping: 1}, function(err, _result){
         if(!err){
             console.log("Все заебись");
         }
@@ -23,11 +31,17 @@ client.connect(function(err, client){
 });
 
 const app = express();
-app.use(todoRoutes)
+app.use(cors(corsOption))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(userRoute);
+app.use(express.json())
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
 
-app.listen(6000, () => {
-    console.log(`Server Started at ${6000}`)
+
+// "🐕🐕🐕🐕🐕🐕🐕"
+const port = process.env.PORT;
+
+app.listen(port, () => {
+    console.log(`Server Started at ${port}`)
 })
