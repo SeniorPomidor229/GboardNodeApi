@@ -1,0 +1,28 @@
+{
+  "name": "gboardnodeapi",
+  "version": "1.0.0",
+  "description": "very cool repo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeniorPomidor229/GboardNodeApi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeniorPomidor229/GboardNodeApi/issues"
+  },
+  "homepage": "https://github.com/SeniorPomidor229/GboardNodeApi#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
+}
