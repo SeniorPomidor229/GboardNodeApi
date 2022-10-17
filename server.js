@@ -4,7 +4,7 @@ const connectionString = process.env.MONGOURI;
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
-
+const todoRoutes = require('./routes/user_routes')
 const client = new mongoClient(connectionString);
 
 client.connect(function(err, client){
@@ -23,8 +23,11 @@ client.connect(function(err, client){
 });
 
 const app = express();
+app.use(todoRoutes)
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
+app.listen(6000, () => {
+    console.log(`Server Started at ${6000}`)
 })
