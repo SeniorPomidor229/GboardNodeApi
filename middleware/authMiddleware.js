@@ -15,24 +15,28 @@ function encodeAccessToken(token){
     return jwt.decode(token, {complete: true});
 }
 
-//функция (параметры в роуте) для проверки токена
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-  
-    if (token == null) return res.sendStatus(401)
-  
-    jwt.verify(token, secret, (err, user) => {
-      console.log(err)
-  
-      if (err) return res.sendStatus(403)
-  
-      req.user = user
-  
-      next()
-    })
-}
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
 
+        jwt.verify(token, secret, (err) => {
+            if (err) {
+                console.log(err)
+                return res.status(403).json({
+                    message: "Неправильно 🐕"
+                });
+            }
+
+            next();
+        });
+    } else {
+        res.status(401).json({
+            message: "Неавторизирован 🐕"
+        });
+    };
+};
+
+exports.authenticateJWT = authenticateJWT;
 exports.encodeAccessToken = encodeAccessToken;
 exports.generateAccessToken = generateAccessToken;
-exports.authenticateToken = authenticateToken;

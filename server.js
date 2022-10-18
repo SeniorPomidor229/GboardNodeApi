@@ -34,10 +34,10 @@ client.connect(function(_err, client){
 const app = express();
 app.use(cors(corsOption))
 app.use(express.urlencoded({ extended: true }))
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(userRoute);
 app.use(authRoute);
-app.use(express.json());
+
 
 // "🐕🐕🐕🐕🐕🐕🐕"
 const port = process.env.PORT;
