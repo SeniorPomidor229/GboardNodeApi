@@ -8,6 +8,7 @@ const client = new mongoClient(connectionString);
 const cors = require('cors')
 
 const userRoute = require('./routes/user_routes')
+const authRoute = require('./routes/auth_routes')
 
 //эта херня нужна, чтоб фетч запросом с этого адреса не была Cors политика
 var corsOption = {
@@ -35,9 +36,8 @@ app.use(cors(corsOption))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(userRoute);
-app.use(express.json())
-
-
+app.use(authRoute);
+app.use(express.json());
 
 // "🐕🐕🐕🐕🐕🐕🐕"
 const port = process.env.PORT;
