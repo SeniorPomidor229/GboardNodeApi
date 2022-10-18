@@ -11,6 +11,7 @@ const collection = db.collection('Users');
 
 const router = Router();
 
+//эта хрень работает с обработками, стоит менять только при расширении млжелей
 router.route("/Create/User").post(async function (req, res){
   if (!req.body.phone || !req.body.email || !req.body.password){
     return res.status(400).json({

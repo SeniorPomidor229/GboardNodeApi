@@ -12,6 +12,7 @@ const collection = db.collection('Users');
 
 const router = Router();
 
+//endpoint для входа, впринципе работает
 router.route("/Token").post(async function (req, res){
     if (!req.body.email || !req.body.password){
         return res.status(400).json({
