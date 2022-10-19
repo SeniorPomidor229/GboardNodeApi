@@ -7,7 +7,6 @@ const jwt = require('../middleware/authMiddleware').generateAccessToken;
 const mongoClient = require('mongodb').MongoClient;
 const client = new mongoClient(connectionString);
 
-
 const db = client.db('Gboard');
 const collection = db.collection('Users');
 

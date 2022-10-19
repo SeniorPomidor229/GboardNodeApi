@@ -8,13 +8,14 @@ const jwt = require('jsonwebtoken');
 //функция для генерация токена доступа
 function generateAccessToken(username){
     return jwt.sign({username: username}, secret, {expiresIn: life_time});
-}
+};
 
 //функция для декодирования токена(в токене может лежать модификаторы доступа)
 function encodeAccessToken(token){
     return jwt.decode(token, {complete: true});
-}
+};
 
+//проверка на работоспособность токена
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
@@ -26,8 +27,7 @@ const authenticateJWT = (req, res, next) => {
                 return res.status(403).json({
                     message: "Неправильно 🐕"
                 });
-            }
-
+            };
             next();
         });
     } else {

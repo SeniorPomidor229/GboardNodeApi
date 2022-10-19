@@ -32,7 +32,7 @@ client.connect(function(_err, client){
 });
 
 const app = express();
-app.use(cors(corsOption))
+app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(userRoute);
